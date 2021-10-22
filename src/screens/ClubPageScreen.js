@@ -1,14 +1,24 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import {useDispatch, useSelector} from 'react-redux'
 
 import { Information } from '../components/Information'
 import { THEME } from '../theme'
 import { AppIcon } from '../components/AppIcon'
+import { loadClub } from '../store/actions/clubAction'
 
 export const ClubPageScreen = ({ navigation }) => {
   const goToUser = () => {
     navigation.navigate('NewUser')
   }
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(loadClub())
+  },[dispatch])
+
+  const clubInfo = useSelector(state => state.user)
 
   return (
     <View style={styles.wrapper}>
