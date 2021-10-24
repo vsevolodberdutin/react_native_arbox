@@ -1,23 +1,27 @@
 import React, { useEffect } from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { THEME } from '../theme'
 import { Icon, MaterialIcon, MaterialIconCard } from '../components/AppIcon'
-import { loadUser } from '../store/actions/userAction'
+import { loadUsers } from '../store/actions/userAction'
+
+
 
 export const NewUserScreen = ({ navigation }) => {
   const goToClub = () => {
     navigation.navigate('Club')
   }
-
+  
   const dispatch = useDispatch()
-
+  const User = useSelector(state => state.users.allUsers[0])
+// ????????  
+if (User){console.log(User.name)}
+// ????????  
+  
   useEffect(() => {
-    dispatch(loadUser())
+    dispatch(loadUsers())
   }, [dispatch])
-
-  const userInfo = useSelector((state) => state.user)
 
   return (
     <View style={styles.wrapper}>
@@ -82,7 +86,7 @@ export const NewUserScreen = ({ navigation }) => {
             marginTop: '15px',
           }}
         >
-          New User
+          {User? User.name: '_New User'}
         </Text>
         <Text
           style={{
@@ -92,15 +96,15 @@ export const NewUserScreen = ({ navigation }) => {
             marginTop: '15px',
           }}
         >
-          Body Builder
+          {User? User.level: '_Body Builder'}
         </Text>
       </View>
 
       <View style={styles.card}>
         <View
           style={{
-            'border-top-left-radius': 20,
-            'border-top-right-radius': 20,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
             backgroundColor: THEME.MAIN_COLOR,
             height: 20,
             width: '100%',
@@ -112,6 +116,7 @@ export const NewUserScreen = ({ navigation }) => {
         </View>
 
         <View style={styles.cardInfo}>
+        <TouchableOpacity onPress={goToClub}>
           <Image
             source={require('../../assets/icon.png')}
             style={{
@@ -121,11 +126,12 @@ export const NewUserScreen = ({ navigation }) => {
               backgroundColor: THEME.CLUB_COLOR,
             }}
           />
+          </TouchableOpacity>
           <View style={styles.cardInfoBody}>
 
             <View style={{marginLeft: 10}}>
-              <Text style={styles.cardTextMain}>Jym</Text>
-              <Text style={styles.cardTextActive}>Active</Text>
+              <Text style={styles.cardTextMain} onPress={goToClub}>{User? User.clubs[0].name: '_Jym'}</Text>
+              <Text style={styles.cardTextActive} onPress={goToClub}>Active</Text>
             </View>
 
             <View style={styles.twoIcons}>
@@ -174,7 +180,7 @@ export const NewUserScreen = ({ navigation }) => {
           />
           <View style={{ paddingLeft: '30px' }}>
             <Text style={styles.CardTextLight}>Birthday</Text>
-            <Text style={styles.cardTextMain}>January 1, 1990</Text>
+            <Text style={styles.cardTextMain}>{User? User.birthday: '_January 1, 1990'}</Text>
           </View>
         </View>
       </View>
@@ -263,6 +269,7 @@ const styles = StyleSheet.create({
     color: THEME.USER_COLOR,
     fontSize: 18,
     fontWeight: 'bold',
+    
   },
   CardTextLight: {
     color: THEME.BLACK_COLOR,

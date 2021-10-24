@@ -1,22 +1,22 @@
 import React from 'react'
-import { View, StyleSheet, ImageBackground, Text } from 'react-native'
+import { View, StyleSheet, Linking } from 'react-native'
 import { THEME } from '../theme'
 import { IconClubCard } from './AppIcon'
 
-export const ContactPlate = ({ data }) => {
+export const ContactPlate = (data) => {
   return (
     <View style={styles.card}>
       <IconClubCard
         title="phone"
         name="phone"
-        color={THEME.BLACK_COLOR}
+        color={THEME.MAIN_COLOR}
         onPress={() => console.log('phone')}
       />
       <IconClubCard
         title="language"
         name="language"
-        color={THEME.MAIN_COLOR}
-        onPress={() => console.log('language')}
+        color={THEME.BLACK_COLOR}
+        onPress={()=>{ Linking.openURL(data.props)}}
       />
       <IconClubCard
         title="mail-outline"

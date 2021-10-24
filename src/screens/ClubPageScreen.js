@@ -9,17 +9,17 @@ import { IconClub } from '../components/AppIcon'
 import { loadClub } from '../store/actions/clubAction'
 
 export const ClubPageScreen = ({ navigation }) => {
+
   const goToUser = () => {
     navigation.navigate('NewUser')
   }
 
   const dispatch = useDispatch()
+  const User = useSelector(state => state.users.allUsers[0])
 
   useEffect(() => {
     dispatch(loadClub())
   },[dispatch])
-
-  const clubInfo = useSelector(state => state.user)
 
   return (
     <View style={styles.wrapper}>
@@ -54,7 +54,7 @@ export const ClubPageScreen = ({ navigation }) => {
             marginBottom: '5px',
           }}
         >
-          JymGym
+          {User? User.clubs[0].name: '_Jym'}
         </Text>
         <Text
           style={{
@@ -64,7 +64,7 @@ export const ClubPageScreen = ({ navigation }) => {
             marginTop: '10px',
           }}
         >
-          Open Gym 6:00-18:00
+          Open Gym {User? User.clubs[0].workingHours: '_6:00-18:00'}
         </Text>
         <Text
           style={{
@@ -74,12 +74,12 @@ export const ClubPageScreen = ({ navigation }) => {
             marginTop: '10px',
           }}
         >
-          Rotshild 15, Tel Aviv
+          {User? User.clubs[0].address: '_Rotshild 15, Tel Aviv'}
         </Text>
       </View>
 
       <View style={styles.center}>
-        <ContactPlate/>
+        <ContactPlate props='https://google.com'/>
         <Information />
       </View>
     </View>

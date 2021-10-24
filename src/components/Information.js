@@ -1,35 +1,64 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { View, StyleSheet, Text } from 'react-native'
+import {useDispatch, useSelector} from 'react-redux'
 
 import { THEME } from '../theme'
+import { loadClub } from '../store/actions/clubAction'
 
 export const Information = ({ data }) => {
+  const [isActive, setIsActive] = useState(true)
+
+  const dispatch = useDispatch()
+  const User = useSelector(state => state.users.allUsers[0])
+
+  useEffect(() => {
+    dispatch(loadClub())
+  },[dispatch])
+
   return (
     <View style={styles.main}>
       <View style={styles.headerBlock}>
         <View style={styles.label}>
-          <Text style={styles.header}>My Memberships</Text>
+          <Text 
+            style={styles.header}
+            onPress={() => setIsActive(true)}
+          >
+            My Memberships</Text>
+          {isActive?
           <View style={styles.underline} />
+          : <View/>}
         </View>
         <View style={styles.label}>
-          <Text style={styles.header}>My Forms</Text>
-          <View style={styles.underline} />
+          <Text 
+            style={styles.header}
+            onPress={() => setIsActive(false)}
+          >My Forms</Text>
+          {isActive?
+          <View/>
+          :<View style={styles.underline} />
+          }
         </View>
       </View>
       <View style={styles.info}>
         <View
           style={{
-            'border-top-left-radius': 20,
-            'border-top-right-radius': 20,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
             backgroundColor: THEME.MAIN_COLOR,
             height: 20,
             width: '100%',
           }}
         />
           <View style={styles.cardTitle}>
-            <Text style={styles.titleTop}>About memberships</Text>
+          {isActive?
+            <Text style={styles.titleTop}> {User? User.clubs[0].myMemberships.title: '_About memberships'}</Text>
+          : <Text style={styles.titleTop}> {User? User.clubs[0].myForms.title: '_About forms'}</Text>
+          }   
           </View>
-            <Text style={styles.text}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, doloremque consequatur autem aperiam illum sequi libero exercitationem blanditiis! Soluta, explicabo!</Text>
+          {isActive?
+            <Text style={styles.text}>{User? User.clubs[0].myMemberships.info: '_Some text memberships'}</Text>
+          :  <Text style={styles.text}>{User? User.clubs[0].myForms.info: '_Some text forms'}</Text>
+          }
       </View>
     </View>
   )

@@ -1,9 +1,9 @@
-import { LOAD_USER } from '../types'
+import { LOAD_USERS } from '../types'
 import { DATA } from '../../data'
 
-export const loadUser = () => {
+export const loadUsers = () => {
   return {
-    type: LOAD_USER,
+    type: LOAD_USERS,
     payload: DATA,
   }
 }

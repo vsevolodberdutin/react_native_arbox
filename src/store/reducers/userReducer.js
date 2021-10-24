@@ -1,21 +1,15 @@
-import { LOAD_USER } from "../types"
+import { LOAD_USERS } from "../types"
 
 const initialState = {
-    name: '',
-    level: '',
-    clubs: [],
-    birthDay: '',
+    allUsers: [],
 }
 
 export const userReducer = (state = initialState, action) => {
     switch (action.type){
-        case LOAD_USER:
+        case LOAD_USERS:
         return {
             ...state, 
-            name: action.name,
-            level: action.level,
-            clubs: action.clubs,
-            birthDay: action.birthDay,
+            allUsers: action.payload
         }
         default:
             return state
