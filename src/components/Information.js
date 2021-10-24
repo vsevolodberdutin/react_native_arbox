@@ -1,38 +1,87 @@
 import React from 'react'
-import { View, StyleSheet, ImageBackground, Text } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
+
+import { THEME } from '../theme'
 
 export const Information = ({ data }) => {
   return (
-    <View style={styles.info}>
-        <View style={styles.textWrap}>
-          <Text style={styles.title}>
-            dhfadkjsfhkladj
-          </Text>
+    <View style={styles.main}>
+      <View style={styles.headerBlock}>
+        <View style={styles.label}>
+          <Text style={styles.header}>My Memberships</Text>
+          <View style={styles.underline} />
         </View>
-          <Text>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni nihil dicta, at aspernatur saepe blanditiis quibusdam explicabo consequatur deserunt dolores temporibus exercitationem facilis, aperiam fugit beatae unde sapiente alias laboriosam sunt architecto esse quod cumque numquam? Aut, debitis! Cumque pariatur nesciunt quia omnis esse at laborum soluta culpa est perspiciatis tempore similique atque vero eum perferendis a totam ut suscipit, obcaecati enim debitis doloribus fuga placeat. Libero provident obcaecati ut error voluptates exercitationem, ea nihil? Sit quas quos officia quo a fugit voluptatum aliquam eveniet exercitationem, autem inventore debitis nemo quidem aliquid mollitia vero commodi iure animi nihil ipsa delectus!
-          </Text>
+        <View style={styles.label}>
+          <Text style={styles.header}>My Forms</Text>
+          <View style={styles.underline} />
+        </View>
+      </View>
+      <View style={styles.info}>
+        <View
+          style={{
+            'border-top-left-radius': 20,
+            'border-top-right-radius': 20,
+            backgroundColor: THEME.MAIN_COLOR,
+            height: 20,
+            width: '100%',
+          }}
+        />
+          <View style={styles.cardTitle}>
+            <Text style={styles.titleTop}>About memberships</Text>
+          </View>
+            <Text style={styles.text}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae, doloremque consequatur autem aperiam illum sequi libero exercitationem blanditiis! Soluta, explicabo!</Text>
+      </View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
-  info: {
-    marginBottom: 15,
-    overflow: 'hidden'
+  main: {
+    paddingTop: 15,
+    flex:4,
   },
-  image: {
-    width: '100%',
-    height: 200
+  headerBlock: {
+    flex:0.5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    margin: 10,
+    paddingLeft: 25,
+    paddingRight: 25,
   },
-  textWrap: {
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    paddingVertical: 5,
+  label: {
     alignItems: 'center',
-    width: '100%'
   },
-  title: {
-    color: '#fff',
-    fontFamily: 'open-regular'
-  }
+  header: {
+    color: THEME.GREY_COLOR,
+    fontSize: 20,
+    // display:'none',
+  },
+  underline: {
+    backgroundColor: THEME.WHITE_COLOR,
+    height: 2,
+    width: '60%',
+    borderRadius: 2,
+    marginTop: 5,
+  },
+  info: {
+    flex: 3.5,
+    backgroundColor: THEME.WHITE_COLOR,
+    borderRadius: 20,
+    margin: 10,
+  },
+  cardTitle: {
+    backgroundColor: THEME.MAIN_COLOR,
+  },
+  titleTop: {
+    color: THEME.BLACK_COLOR,
+    fontSize: 18,
+    marginLeft: '25px',
+    marginBottom: '20px',
+  },
+  text: {
+    color: THEME.BLACK_COLOR,
+    fontSize: 16,
+    margin: '25px',
+  },
+  
 })
