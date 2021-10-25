@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { THEME } from '../theme'
 import { Icon, MaterialIcon, MaterialIconCard } from '../components/AppIcon'
-import { loadUsers } from '../store/actions/userAction'
-
+import { THEME } from '../theme'
+import { loadUsers, addUser } from '../store/actions/userAction'
+import { DATA } from '../data'
 
 
 export const NewUserScreen = ({ navigation }) => {
@@ -14,12 +14,10 @@ export const NewUserScreen = ({ navigation }) => {
   }
   
   const dispatch = useDispatch()
-  const User = useSelector(state => state.users.allUsers[0])
-// ????????  
-if (User){console.log(User.name)}
-// ????????  
+  const User = useSelector(state => state.users.allUsers)
   
   useEffect(() => {
+    dispatch(addUser(DATA))
     dispatch(loadUsers())
   }, [dispatch])
 
@@ -130,7 +128,7 @@ if (User){console.log(User.name)}
           <View style={styles.cardInfoBody}>
 
             <View style={{marginLeft: 10}}>
-              <Text style={styles.cardTextMain} onPress={goToClub}>{User? User.clubs[0].name: '_Jym'}</Text>
+              <Text style={styles.cardTextMain} onPress={goToClub}>{User? User.clubName: '_Jym'}</Text>
               <Text style={styles.cardTextActive} onPress={goToClub}>Active</Text>
             </View>
 
@@ -214,9 +212,9 @@ const styles = StyleSheet.create({
   },
   card: {
     flex: 5,
-    justifyContent: 'start',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    borderRadius: '20px',
+    borderRadius: 20,
     margin: '10px',
     backgroundColor: THEME.WHITE_COLOR,
   },
@@ -226,7 +224,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%',
     backgroundColor: THEME.MAIN_COLOR,
-  },
+  }, 
   titleTop: {
     color: THEME.BLACK_COLOR,
     fontSize: 18,
@@ -258,7 +256,7 @@ const styles = StyleSheet.create({
   twoIcons: {
     flexDirection: 'row',
     alignContent:'center',
-    marginRight: '25px',
+    marginRight: 25,
   },
   cardTextMain: {
     color: THEME.BLACK_COLOR,
@@ -274,6 +272,6 @@ const styles = StyleSheet.create({
   CardTextLight: {
     color: THEME.BLACK_COLOR,
     fontSize: 18,
-    fontWeight: '100',
+    fontWeight: 100,
   },
 })

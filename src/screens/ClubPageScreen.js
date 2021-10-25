@@ -6,7 +6,7 @@ import { Information } from '../components/Information'
 import {ContactPlate} from '../components/ContactPlate'
 import { THEME } from '../theme'
 import { IconClub } from '../components/AppIcon'
-import { loadClub } from '../store/actions/clubAction'
+import { loadUsers } from '../store/actions/userAction'
 
 export const ClubPageScreen = ({ navigation }) => {
 
@@ -15,10 +15,10 @@ export const ClubPageScreen = ({ navigation }) => {
   }
 
   const dispatch = useDispatch()
-  const User = useSelector(state => state.users.allUsers[0])
+  const User = useSelector(state => state.users.allUsers)
 
   useEffect(() => {
-    dispatch(loadClub())
+    dispatch(loadUsers())
   },[dispatch])
 
   return (
@@ -54,7 +54,7 @@ export const ClubPageScreen = ({ navigation }) => {
             marginBottom: '5px',
           }}
         >
-          {User? User.clubs[0].name: '_Jym'}
+          {User? User.clubName: '_Jym'}
         </Text>
         <Text
           style={{
@@ -64,7 +64,7 @@ export const ClubPageScreen = ({ navigation }) => {
             marginTop: '10px',
           }}
         >
-          Open Gym {User? User.clubs[0].workingHours: '_6:00-18:00'}
+          Open Gym {User? User.workingHours: '_6:00-18:00'}
         </Text>
         <Text
           style={{
@@ -74,7 +74,7 @@ export const ClubPageScreen = ({ navigation }) => {
             marginTop: '10px',
           }}
         >
-          {User? User.clubs[0].address: '_Rotshild 15, Tel Aviv'}
+          {User? User.address: '_Rotshild 15, Tel Aviv'}
         </Text>
       </View>
 

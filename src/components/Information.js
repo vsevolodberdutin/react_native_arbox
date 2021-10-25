@@ -3,16 +3,16 @@ import { View, StyleSheet, Text } from 'react-native'
 import {useDispatch, useSelector} from 'react-redux'
 
 import { THEME } from '../theme'
-import { loadClub } from '../store/actions/clubAction'
+import { loadUsers } from '../store/actions/userAction'
 
 export const Information = ({ data }) => {
   const [isActive, setIsActive] = useState(true)
 
   const dispatch = useDispatch()
-  const User = useSelector(state => state.users.allUsers[0])
+  const User = useSelector(state => state.users.allUsers)
 
   useEffect(() => {
-    dispatch(loadClub())
+    dispatch(loadUsers())
   },[dispatch])
 
   return (
@@ -51,13 +51,13 @@ export const Information = ({ data }) => {
         />
           <View style={styles.cardTitle}>
           {isActive?
-            <Text style={styles.titleTop}> {User? User.clubs[0].myMemberships.title: '_About memberships'}</Text>
-          : <Text style={styles.titleTop}> {User? User.clubs[0].myForms.title: '_About forms'}</Text>
+            <Text style={styles.titleTop}> {User? User.memTitle: '_About memberships'}</Text>
+          : <Text style={styles.titleTop}> {User? User.formTitle: '_About forms'}</Text>
           }   
           </View>
           {isActive?
-            <Text style={styles.text}>{User? User.clubs[0].myMemberships.info: '_Some text memberships'}</Text>
-          :  <Text style={styles.text}>{User? User.clubs[0].myForms.info: '_Some text forms'}</Text>
+            <Text style={styles.text}>{User? User.memInfo: '_Some text memberships'}</Text>
+          :  <Text style={styles.text}>{User? User.formInfo: '_Some text forms'}</Text>
           }
       </View>
     </View>
@@ -83,7 +83,6 @@ const styles = StyleSheet.create({
   header: {
     color: THEME.GREY_COLOR,
     fontSize: 20,
-    // display:'none',
   },
   underline: {
     backgroundColor: THEME.WHITE_COLOR,
