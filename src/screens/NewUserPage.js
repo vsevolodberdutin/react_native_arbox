@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Icon, MaterialIcon, MaterialIconCard } from '../components/AppIcon'
 import { THEME } from '../theme'
 import { loadUsers, addUser } from '../store/actions/userAction'
-import { DATA } from '../data'
+// import { DATA } from '../data'
 
 
 export const NewUserScreen = ({ navigation }) => {
@@ -17,7 +17,7 @@ export const NewUserScreen = ({ navigation }) => {
   const User = useSelector(state => state.users.allUsers)
   
   useEffect(() => {
-    dispatch(addUser(DATA))
+    // dispatch(addUser(DATA))
     dispatch(loadUsers())
   }, [dispatch])
 
@@ -272,6 +272,6 @@ const styles = StyleSheet.create({
   CardTextLight: {
     color: THEME.BLACK_COLOR,
     fontSize: 18,
-    fontWeight: 100,
+    fontWeight: "100",
   },
 })

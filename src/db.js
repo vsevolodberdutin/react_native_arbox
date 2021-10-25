@@ -1,25 +1,6 @@
 import * as SQLite from 'expo-sqlite'
-import {
-    Platform,
-  } from "react-native";
 
-// function openDatabase() {
-//     if (Platform.OS === "web") {
-//       return {
-//         transaction: () => {
-//           return {
-//             executeSql: () => {},
-//           };
-//         },
-//       };
-//     }
-  
-//     const db = SQLite.openDatabase("db.db");
-//     return db;
-//   }
-//   const db = openDatabase();
 const db = SQLite.openDatabase('users.db')
-
 
 export class DB {
   static init() {
@@ -27,7 +8,6 @@ export class DB {
       db.transaction(tx => {
         tx.executeSql(
             'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY NOT NULL, name TEXT , level TEXT, birthday TEXT, clubName TEXT, workingHours TEXT, address TEXT, phone TEXT, website TEXT, eMail TEXT, memTitle TEXT, memInfo TEXT, formTitle TEXT, formInfo TEXT)',
-            // 'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY NOT NULL, name TEXT NOT NULL)',
             [],
           resolve,
           (_, error) => reject(error)
